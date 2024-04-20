@@ -1,36 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import './style.css';
 
-function App() {
+const CountryList = () => {
   const [countries, setCountries] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = () => {
-    fetch('https://restcountries.com/v3.1/all')
-      .then(response => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://restcountries.com/v3.1/all');
         if (!response.ok) {
           throw new Error('Failed to fetch');
         }
-        return response.json();
-      })
-      .then(data => {
+        const data = await response.json();
         setCountries(data);
-      })
-      .catch(error => {
+      } catch (error) {
         setError(error.message);
-        console.error('Error fetching data:', error); // Log the error to the console
-      });
-  };
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="App">
-      <header className="App-header">
+      {/* <header className="App-header">
         <h1>Country Flags</h1>
-      </header>
+      </header> */}
       <div className="flags-container">
         {error && <div className="error">{error}</div>}
         {countries.map(country => (
@@ -47,4 +44,4 @@ function App() {
   );
 }
 
-export default App;
+export default CountryList;
