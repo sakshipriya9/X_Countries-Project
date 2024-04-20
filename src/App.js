@@ -22,10 +22,10 @@ function App() {
       })
       .catch(error => {
         setError(error.message);
-        console.error('Error fetching data:', error);
+        console.error('Error fetching data:', error); // Log the error to the console
       });
   };
-
+  
   return (
     <div className="App">
       <header className="App-header">
