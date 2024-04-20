@@ -13,7 +13,7 @@ function App() {
     fetch('https://restcountries.com/v3.1/all')
       .then(response => {
         if (!response.ok) {
-          throw new Error('Failed to fetch countries');
+          throw new Error('Failed to fetch');
         }
         return response.json();
       })
@@ -25,7 +25,7 @@ function App() {
         console.error('Error fetching data:', error); // Log the error to the console
       });
   };
-  
+
   return (
     <div className="App">
       <header className="App-header">
